@@ -60,36 +60,50 @@ public class Nfa {
      *
      * @param input The input to the NFA.
      */
-    public Nfa input(String input) {
-        // Check that this input is contained within the input alphabet
-        if (!Arrays.asList(inputAlphabet).contains(input) && !input.equals("")) {
-            throw new InvalidParameterException("'" + input + "' is not a valid input");
-        }
-
-        Set<String> nextState = new HashSet<>();
-
-        // Explore all possible transitions from the current state
-        for (String state : currentState) {
-            // For epsilon transition
-            String epsilonKey = getKeyForTransition("", state);
-            Set<Transition> epsilonTransitions = transitions.getOrDefault(epsilonKey, Collections.emptySet());
-            for (Transition epsilonTransition : epsilonTransitions) {
-                nextState.add(epsilonTransition.newState);
+    public Nfa input(String input) throws InvalidParameterException {
+        for (int i = 0; i < input.length(); i++) {
+            String str = String.valueOf(input.charAt(i));
+            // System.out.println("i = "+i+", str = "+str);
+            // Check that this input is contained within the input alphabet
+            if (!Arrays.asList(inputAlphabet).contains(str) && !str.equals("")) {
+                throw new InvalidParameterException("'" + str + "' is not a valid input");
             }
 
-            // For non-epsilon transitions
-            if (!input.equals("")) {
-                String key = getKeyForTransition(input, state);
-                Set<Transition> possibleTransitions = transitions.getOrDefault(key, Collections.emptySet());
-                for (Transition transition : possibleTransitions) {
-                    nextState.add(transition.newState);
+            Set<String> nextState = new HashSet<>();
+
+            // Explore all possible transitions from the current state
+            boolean epsilonTrans = false;
+            for (String state : currentState) {
+                epsilonTrans = false;
+                // For epsilon transition
+                String epsilonKey = getKeyForTransition("", state);
+                Set<Transition> epsilonTransitions = transitions.getOrDefault(epsilonKey, Collections.emptySet());
+                // System.out.println("epsilon trans: "+ epsilonTransitions);
+                for (Transition epsilonTransition : epsilonTransitions) {
+                    nextState.add(epsilonTransition.newState);
+                }
+
+                // For non-epsilon transitions
+                if (!str.equals("")) {
+                    String key = getKeyForTransition(str, state);
+                    Set<Transition> possibleTransitions = transitions.getOrDefault(key, Collections.emptySet());
+                    for (Transition transition : possibleTransitions) {
+                        nextState.add(transition.newState);
+                    }
+                    // System.out.println("non-epsilon trans: "+ possibleTransitions);
+                    if (possibleTransitions.isEmpty()) {
+                        epsilonTrans = true;
+                    }
                 }
             }
+            if (epsilonTrans) {
+                i--;
+            }
+
+            // Update current state
+            currentState = nextState;
+            // System.out.println(currentState);
         }
-
-        // Update current state
-        currentState = nextState;
-
         return this;
     }
 

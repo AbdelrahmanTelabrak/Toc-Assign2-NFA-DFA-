@@ -26,7 +26,7 @@ public class Nfa {
      * @param startState      The starting state.
      */
     public Nfa(String[] states, String[] inputAlphabet,
-                                           String[] acceptingStates, Transition[] transitions, String startState) {
+            String[] acceptingStates, Transition[] transitions, String startState) {
         this.states = states;
         this.inputAlphabet = inputAlphabet;
         this.acceptingStates = acceptingStates;
@@ -72,7 +72,7 @@ public class Nfa {
             Set<String> nextState = new HashSet<>();
 
             // Explore all possible transitions from the current state
-            boolean epsilonTrans = false;
+            boolean epsilonTrans = false, firstItr = true;
             for (String state : currentState) {
                 epsilonTrans = false;
                 // For epsilon transition
@@ -91,10 +91,11 @@ public class Nfa {
                         nextState.add(transition.newState);
                     }
                     // System.out.println("non-epsilon trans: "+ possibleTransitions);
-                    if (possibleTransitions.isEmpty()) {
+                    if (possibleTransitions.isEmpty() && firstItr) {
                         epsilonTrans = true;
                     }
                 }
+                firstItr = false;
             }
             if (epsilonTrans) {
                 i--;

@@ -204,6 +204,7 @@ public class App {
             }else{
                 writer.write("False\n");
             }
+            turnstileNfa.reset();
         }
     }
 
@@ -242,6 +243,7 @@ public class App {
             }else{
                 writer.write("False\n");
             }
+            turnstileNfa.reset();
         }
     }
 
@@ -271,6 +273,7 @@ public class App {
             }else{
                 writer.write("False\n");
             }
+            turnstileNfa.reset();
         }
     }
 
@@ -297,6 +300,7 @@ public class App {
             }else{
                 writer.write("False\n");
             }
+            turnstileNfa.reset();
         }
 
     }

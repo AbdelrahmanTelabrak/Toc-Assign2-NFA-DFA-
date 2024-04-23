@@ -61,26 +61,114 @@ public class App {
         writer.close();
     }
 
+
+    ////////// PROBLRM 1
     public static void problem1(BufferedReader reader, BufferedWriter writer) throws IOException {
 
+              Dfa Problem1 = new Dfa(
+                new String[]{"q0", "q1", "q2"},
+                new String[]{"a", "b"},
+                new String[]{"q0", "q1"},
+                new Transition[]{
+                        new Transition("q0", "a", "q0"),
+                        new Transition("q0", "b", "q1"),
+                        new Transition("q1", "b", "q1"),
+                        new Transition("q1", "a", "q2"),
+                        new Transition("q2", "a", "q2"),
+                        new Transition("q2", "b", "q2"),
+
+                },
+                "q0");
+                      String line;
+        while (!(line = reader.readLine()).equals("end")){
+            Problem1.input(line);
+            if (Problem1.isAccepting()){
+                writer.write("True\n");
+            }else{
+                writer.write("False\n");
+            }
+        }
     }
 
+        // Problem1.input("ab");
+        // Problem1.input("ba");
+        // Problem1.input("aba");
+        //  Problem1.input("bbb");
+        //  System.out.println(Problem1.isAccepting());
 
     public static void problem2(BufferedReader reader, BufferedWriter writer) throws IOException {
 
     }
-
+    ///////// PROBLRM 3
     public static void problem3(BufferedReader reader, BufferedWriter writer) throws IOException {
 
+               Dfa Problem3 = new Dfa(
+                new String[]{"q0", "q1", "q2"},
+                new String[]{"x", "y"},
+                new String[]{"q1"},
+                new Transition[]{
+                        new Transition("q0", "y", "q0"),
+                        new Transition("q0", "x", "q1"),
+                        new Transition("q1", "y", "q1"),
+                        new Transition("q1", "x", "q2"),
+                        new Transition("q2", "y", "q2"),
+                        new Transition("q2", "x", "q1"),
+
+                },
+                "q0");
+        String line;
+        while (!(line = reader.readLine()).equals("end")){
+            Problem3.input(line);
+            if (Problem3.isAccepting()){
+                writer.write("True\n");
+            }else{
+                writer.write("False\n");
+            }
+        }
     }
+
+        // Problem3.input("x");
+        // Problem3.input("xyxyxyy");
+        // Problem3.input("yyy");
+        // Problem3.input("yxxxy");
+        //  System.out.println(Problem3.isAccepting());
 
     public static void problem4(BufferedReader reader, BufferedWriter writer) throws IOException {
 
     }
-
+    //////////// PROBLEM 5
     public static void problem5(BufferedReader reader, BufferedWriter writer) throws IOException {
 
+                Dfa Problem5 = new Dfa(
+                new String[]{"q0", "q1", "q2"},
+                new String[]{"0", "1"},
+                new String[]{"q0"},
+                new Transition[]{
+                        new Transition("q0", "0", "q0"),
+                        new Transition("q0", "1", "q1"),
+                        new Transition("q1", "1", "q1"),
+                        new Transition("q1", "0", "q2"),
+                        new Transition("q2", "1", "q1"),
+                        new Transition("q2", "0", "q0"),
+
+                },
+                "q0");
+        String line;
+        while (!(line = reader.readLine()).equals("end")){
+            Problem5.input(line);
+            if (Problem5.isAccepting()){
+                writer.write("True\n");
+            }else{
+                writer.write("False\n");
+            }
+        }
     }
+
+        // Problem5.input("0");
+        // Problem5.input("10000");
+        // Problem5.input("100");
+        // Problem5.input("101");
+        // System.out.println(Problem5.isAccepting());
 
     public static void problem6(BufferedReader reader, BufferedWriter writer) throws IOException {
 

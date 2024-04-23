@@ -237,16 +237,18 @@ public class App {
         Dfa problem6 = new Dfa(
                 new String[] { "q0", "q1", "q2", "q3", "q4"},
                 new String[] { "0", "1" },
-                new String[] { "q0", "q1" },
+                new String[] { "q0", "q1", "q2" },
                 new Transition[] {
-                        new Transition("q0", "0", "q0"),
-                        new Transition("q0", "1", "q1"),
-                        new Transition("q1", "0", "q0"), //
-                        new Transition("q1", "1", "q2"),
-                        new Transition("q2", "0", "q2"),
+                        new Transition("q0", "0", "q1"),
+                        new Transition("q0", "1", "q2"),
+                        new Transition("q1", "0", "q1"), //
+                        new Transition("q1", "1", "q1"),
+                        new Transition("q2", "0", "q1"),
                         new Transition("q2", "1", "q3"),
-                        new Transition("q3", "0", "q3"),
-                        new Transition("q3", "1", "q1"),
+                        new Transition("q3", "0", "q1"),
+                        new Transition("q3", "1", "q4"),
+                        new Transition("q4", "0", "q1"),
+                        new Transition("q4", "1", "q1"),
                 },
                 "q0"
         );
